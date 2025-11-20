@@ -1,0 +1,130 @@
+/*
+    STEP1 : Check argv[2] is having .bmp using strstr and strcmp or not
+        if true-> store it in char *src_image_fname
+        if false ->print error message return e_failure
+    STEP2 : Check argv[3] is having .txt or .sh or .c or .h using strstr and strcmp or not
+        if true-> store it in  char *secret_fname
+        if false ->print error message return e_failure
+    STEP 3: Check argv[4] is having NULL or not ,
+        if true -> stored by default name(default.bmp) into *stego_image_fname
+        if false -> check if arg[4] is having .bmp or not
+                    if true -> store it into *stego_image_fname
+                    if false -> print error message return e_failure
+    at last if everything is true return e_success
+    */
+ /*
+    STEP 1: Call the check size of .bmp by calling get_image_size_for_bmp(encinfo->fptr_src_image)
+            store the size to structure member image_capacity
+    STEP 2: Call get_file_size(encinfo->size_secret_file);
+            store int structure member
+    STEP 3: image_capacity > 16(magic string) + 32(size of extension) + 32 (extn) + 32 (size of data) + (file_size * 8)
+        if true -> return e_success
+        if false ->return e_failure
+    */
+  /*
+        STEP 1: Reiwnd the src_file_ptr;
+        STEP 2: Declare char imageBuffer[54];
+        STEP 3: Read the 54 bytes from the src file and store into imageBuffer
+        STEP 4: Write the 54 bytes (imageBuffer) to the dest file
+        STEP 5: Check the both fptr offset pointing to the same offset or not
+                if true -> return e_success;
+                if false -> return e_failure;
+    */
+
+    /*
+     STEP 1: char imageBuffer[8];
+     STEP 2: Generate a loop upto the length of the magic string
+     STEP 3: Read 8 bytes from the src image and store into the imageBuffer
+     STEP 4: Call encode_byte_to_lsb(magic_string[i],imgBuffer)
+     STEP 5: write the imageBuffer into the destination file
+     STEP 6: Check the both fptr offset pointing to the same offset or not
+             // if true -> return e_success;
+             //if false -> return e_failure;
+    */
+ /*
+    STEP 1: char imgBuffer[32];
+    STEP 2: Read 32 bytes from src image into the imgBuffer
+    STEP 3: Call encode_size_to_lsb(size,imgBuffer)
+    STEP 4: write the imgBuffer into the destination file
+    STEP 5: Check the both fptr offset pointing to the same offset or not
+           if true-> return e_success;
+           if false-> return e_failure;
+    */
+ /*
+     STEP 1: char imageBuffer[8];
+     STEP 2: Generate a loop upto the length of the extn size
+     STEP 3: Read 8 bytes from the src image and store into the imageBuffer
+     STEP 4: Call encode_byte_to_lsb(file_extn[i],imgBuffer)
+     STEP 5: write the imageBuffer into the destination file
+     STEP 6: Check the both fptr offset pointing to the same offset or not
+             // if true -> return e_success;
+             //if false -> return e_failure;
+    */
+ /*
+     STEP 1: char imageBuffer[32];
+     STEP 2: Read 32 bytes from the src image and store into the imageBuffer
+     STEP 3: Call encode_size_to_lsb(size,imgBuffer)
+     STEP 4: write the imageBuffer into the destination file
+
+     STEP 5: Check the both fptr offset pointing to the same offset or not
+             // if true -> return e_success;
+             //if false -> return e_failure;
+    */
+ /*
+     STEP 1: Char secret_data[encInfo->size_secret_file]
+     STEP 2: rewind(encInfo->size_secret_file) // secret file pointer
+     STEP 3: Read the encInfo->size_secret_file data from secret file and store into the secret_data
+     STEP 4: char imageBuffer[8];
+     STEP 5: Generate a loop upto the sizeof(secret_data)
+     STEP 6: Read 8 bytes from the src image and store into the imageBuffer
+     STEP 7: Call encode_byte_to_lsb(secret_data[i],imgBuffer)
+     STEP 8: write the imageBuffer into the destination file
+     STEP 9: Check the both fptr offset pointing to the same offset or not
+            if true -> return e_success;
+            if false -> return e_failure;
+    */
+/*
+    STEP 1: check the both fptr pointing to the offset same or not
+        if true -> return e_success
+        if false ->return e_failure
+    */
+ /*Generate loop for 8 times
+    STEP 1: Clear the lsb bit from the imgBuffer[i]
+    STEP 2: Take the bit from data
+    STEP 3:  Set the bit into the lsb bit of imgBuffer */
+ /*Generate loop for 32 times
+    STEP 1: Clear the lsb bit from the imgBuffer[i]
+    STEP 2: Take the bit from size
+
+ /*
+       STEP 1 : Call the open_files(encinfo) == e_succcess;
+            if true -> print the prompt message , go to STEP 2
+            if false -> print error message and return e_failure
+       STEP 2 : Call the check_capacity(encinfo) == e_success
+            if true->print the prompt message , go to STEP 3
+            if false->print error message and return e_failure
+       STEP 3: Call the copy_bmp_header(src_fptr,dest_fptr)==e_success
+            if true->print the prompt message , go to STEP 4
+            if false->print error message and return e_failure
+       STEP 4: Call function encode_magic_string(MAGIC_STRING, encInfo) == e_success
+            if true->print the message, go to STEP 5;
+            if false->print error message and return e_failure
+       STEP 5: Store the secret file extension into extn_secret_file;
+       STEP 6: Find the size of the extn_secret_file and store it to some varaible,it will have 4 bytes beacuse the size is an integer
+       STEP 7: Call encode_secret_file_extn_size(size,encInfo)==e_success
+            if true->print the message, go to STEP 8;
+            if false->print error message and return e_failure
+       STEP 8: Call the encode_secret_file_extn(extn_secret_file,encInfo)
+            if true->print the message, go to STEP 9;
+            if false->print error message and return e_failure
+       STEP 9: Call the encode_secret_file_size(size,encInfo)
+            if true->print the message, go to STEP 10
+            if false->print error message and return e_failure
+       STEP 10: Call the encode_secret_file_data(encInfo)
+            if true->print the message, go to STEP 11
+            if false->print error message and return e_failure
+       STEP 11: Call copy_remaining_img_data(fptr_src,fptr_dest)
+            if true->print the message,encoding part completed return e_success
+            if false->print error message and return e_failure
+    */
+    STEP 3:  Set the bit into the lsb bit of imgBuffer */

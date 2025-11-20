@@ -1,0 +1,153 @@
+Storage classes
+------------------------
+[auto
+register
+static]-- apply only on local variables only
+
+
+auto-  just declare local variable without any storage class it will be auto as default memory allocated in stack
+it will be valid only in the given scope(Block)
+
+
+if a pointer is pointing to an address which is not valid such pointers are called dangling pointers.
+
+
+#include<stdio.h>
+int* foo()
+{
+int i=10;
+int *j=&i;
+return j;
+}
+int main()
+{
+int* i;
+i=foo();
+printf("j %d\n",*i);
+return 0;
+}
+
+
+can be done on strings also
+
+#include<stdio.h>
+char* foo()
+{
+  char ca[12]="Hello World" // string
+char* cptr=ca; //char ptr
+return cptr;
+}
+int main()
+{
+   char *ca; // char ptr-->dangling ptr
+ca=foo();
+printf("cas is %s\n",ca);
+return 0;
+}
+
+
+
+#include<stdio.h>
+int main()
+{
+ int i=25;
+  { //inner block
+     int j=10;
+     printf("j is %d\n",j);
+     printf("i is %d\n",i);
+ }
+ printf("j is %d\n",j);
+ printf("i is %d\n",i);-----> leads to compilation error j undeclared because j has th scope only in the inner block and not outside
+ }                             but i has the scope in both inner and outer block
+                              -->if two variable names are same it should have different scope then it is valid
+                              -->multiple definition in same scope gives compiler error ex: int i; 
+                                                                                            int i; (in same scope)
+                             
+
+Register
+-------------------------------------
+
+It is appilicable only on local variables.
+-If we use register we are requesting cpu for allocating memory in cpu registers.
+-This allocation is done in run time but we dont know the compiler will allocate in cpu register or stack depending on  the frequency of occurence  irrespective of you saying it will decide and allocate.
+-But at compile time the compiler thinks memory is allocated in cpu register
+-You cannot request the address of cpu registers
+
+#include<stdio.h>
+int main()
+{
+  //register int i=10;
+  register int i;
+}
+#if 1
+  printf("Enter the value of i\n");
+  scanf("%d".&i);---->give compilation error you cannot request th adrressof the register variable
+  return 0;
+}
+
+(dereferencing works printing address doesn't work)
+
+#include<stdio.h>
+int main()
+{
+  int i=25;//auto
+  register int *j=&i;
+  
+  printf("j is %d\n",*j);// works
+//printf("j is %p\n",&j); // compiler error
+  printf("j %p\n",j); //works
+return 0;
+}
+
+static
+----------------------------------------------
+- memory allocated in the data segment
+#include<stdio.h>
+int* foo()
+{
+static int i=10; // memory allocated in data segment
+int* j=&i;
+
+return j;
+int main()
+{
+  int* i;
+  i=foo();
+  printf("*i =%d\n",*i);
+  return 0;
+}
+
+
+#include<stdio.h>
+
+int book_ticket()
+{
+ static int ticket_sold=0; /* once memory is allocated for ststic variable 
+ticket_sold++;
+return ticket_sold;
+}
+
+int main()
+{
+  int count;
+  count = book_ticket();
+ count = book_ticket();
+ count = book_ticket();
+ count = book_ticket();
+ printf("sold %d\n",count);
+}
+
+
+#include<stdio.h>
+int main()
+{
+   static int i=5;
+   if(--i)
+{
+  return main()// execute only one time return statement immediately // if main() execute 5 times
+}
+printf("i %d\n,i);
+return 0;
+}
+
+

@@ -1,0 +1,21 @@
+compiler translates source code file written in c to machine language
+a program is constituted b the set of translation
+
+
+A global variable declared without storage class has external linkage--(any where in program scope)
+A global variable declared with static storage class has internal linkage--(only in file scope)
+Local variable has no linkage
+variable declaration with "extern" - in such case linkage to be determined by refeering to pvp.
+
+if no previously visible declaration (pvp) then external linkage
+if previously visible declaration (pvp) is a local variable then external linkage
+if previously visible declaration (pvp) is a global variable then linkage is same as of global variable.
+
+
+compilation error if there is linkage disagreement
+
+multiple tentative definition print 1 and looks for previously visible declaration
+
+if pvp is a local variable then it has extrenal linkage
+
+if extern and initializer not permitted in block scope it shows invalid
