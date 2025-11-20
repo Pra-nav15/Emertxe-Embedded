@@ -4,6 +4,7 @@
 #define MAX_KEYWORDS 20
 #define MAX_TOKEN_SIZE 100
 
+typedef unsigned int uint;
 typedef enum {
     KEYWORD,
     OPERATOR,
@@ -21,7 +22,7 @@ typedef struct
     TokenType type;
 } Token;
 
-void initializeLexer(const char* filename);
+void initializeLexer(char* argv[]);
 Token getNextToken();
 void categorizeToken(Token* token);
 int isKeyword(const char* str);

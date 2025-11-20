@@ -31,12 +31,12 @@ int main(int argc, char* argv[])
 {
     if (argc < 2)  // If no argument is given (only ./a.out).
     {
-        printf("\033[0;31mERROR: ./a.out : INVALID ARGUMENTS\033[0m\n");
-        printf("\033[0;33mUSAGE :\033[0m\n");
-        printf("\033[0;33mTo view please pass like:  ./a.out -v mp3filename\033[0m\n");
-        printf("\033[0;33mTo edit please pass like:  ./a.out -e -t/-a/-A/m/-y/-c changing_text mp3filename\033[0m\n");
-        printf("\033[0;33mTo help please pass like:  ./a.out -help\033[0m\n");
-        return mp3_unsupported;
+        printf("\033[1;31mERROR: ./a.out : INVALID ARGUMENTS\033[0m\n");
+        printf("\033[1;33mUSAGE :\033[0m\n");
+        printf("\033[1;33mTo view please pass like:  ./a.out -v mp3filename\033[0m\n");
+        printf("\033[1;33mTo edit please pass like:  ./a.out -e -t/-a/-A/m/-y/-c changing_text mp3filename\033[0m\n");
+        printf("\033[1;33mTo help please pass like:  ./a.out -help\033[0m\n");
+        return failure;
     }
     
     if (check_operation_type(argv[1]) == mp3_help) // If first argument is -help
@@ -47,15 +47,15 @@ int main(int argc, char* argv[])
 
         printf("\033[1;36m %-11s | %20s \033[0m\n", "OPTION", "DESCRIPTION");
         printf("\033[1;35m----------------------------------------------------\033[0m\n");
-        printf("\033[0;33m| %-10s | %-35s |\033[0m\n", "-v", "View MP3 file contents");
-        printf("\033[0;33m| %-10s | %-35s |\033[0m\n", "-e", "Edit MP3 file contents");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-v", "View MP3 file contents");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-e", "Edit MP3 file contents");
         printf("\033[1;35m----------------------------------------------------\033[0m\n");
-        printf("\033[0;33m| %-10s | %-35s |\033[0m\n", "-t", "Edit Song Title");
-        printf("\033[0;33m| %-10s | %-35s |\033[0m\n", "-a", "Edit Artist Name");
-        printf("\033[0;33m| %-10s | %-35s |\033[0m\n", "-A", "Edit Album Name");
-        printf("\033[0;33m| %-10s | %-35s |\033[0m\n", "-y", "Edit Year");
-        printf("\033[0;33m| %-10s | %-35s |\033[0m\n", "-m", "Edit Content/Genre");
-        printf("\033[0;33m| %-10s | %-35s |\033[0m\n", "-c", "Edit Comment");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-t", "Edit Song Title");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-a", "Edit Artist Name");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-A", "Edit Album Name");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-y", "Edit Year");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-m", "Edit Content/Genre");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-c", "Edit Comment");
         printf("\033[1;35m----------------------------------------------------\033[0m\n");
 
     }
@@ -67,17 +67,20 @@ int main(int argc, char* argv[])
             {
                 if (view(&vInfo) == success) //view mp3 tags
                 {
-                    printf("\033[0;32mAll Song Details Displayed Successfully\033[0m\n");
+                    printf("\033[1;32mAll Song Details Displayed Successfully\033[0m\n");
+                    return success;
                 }
             }
             else
             {
-                printf("\033[0;31mUnable to View Song Details\033[0m\n");
+                printf("\033[1;31mUnable to View Song Details\033[0m\n");
+                return failure;
             }
         }
         else
         {
-            printf("\033[0;31mError! 3 Arguments are required for MP3 View\033[0m\n");
+            printf("\033[1;31mError! 3 Arguments are required for MP3 View\033[0m\n");
+            return failure;
         }
 
     }
@@ -91,27 +94,30 @@ int main(int argc, char* argv[])
                 {
                     if (edit(argv, &eInfo) == success) //edit mp3 tags
                     {
-                        printf("\033[0;32mEdit Completed Successfully\033[0m\n");
+                        return success;
                     }
                 }
                 else
                 {
-                    printf("\033[0;31mUnable to Edit Song Details\033[0m\n");
+                    printf("\033[1;31mUnable to Edit Song Details\033[0m\n");
+                    return failure;
                 }
             }
             else
             {
-                printf("\033[0;31mInvalid Edit Option Entered\033[0m\n");
+                printf("\033[1;31mInvalid Edit Option Entered.Check Help Menu\033[0m\n");
+                return failure;
             }
         }
         else
         {
-            printf("\033[0;31mError! 5 Arguments are required for MP3 Edit\033[0m\n");
+            printf("\033[1;31mError! 5 Arguments are required for MP3 Edit\033[0m\n");
+            return failure;
         }
     }
     else // If argument is neither -v, -e, nor -help.
     {
-        printf("\033[0;31mError! Invalid Operation Type\033[0m\n");
+        printf("\033[1;31mError! Invalid Operation Type.Check Help Menu\033[0m\n");
         return failure;
     }
 }

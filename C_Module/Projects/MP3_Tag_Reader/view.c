@@ -13,7 +13,7 @@ Status read_and_validate_mp3_view(char *argv[], ViewInfo *vInfo) //validate comm
     }
     else
     {
-        printf("\033[0;31mError! The Audio File Must be in .mp3 format\033[0m\n");
+        printf("\033[1;31mError! The Audio File Must be in .mp3 format\033[0m\n");
         return failure;
     }
 }
@@ -23,8 +23,8 @@ Status open_files_view(ViewInfo *vInfo) // Function to open MP3 file for reading
     vInfo->fptr_audiofile = fopen(vInfo->audio_file_name, "r");  // Opens the file in read mode.
     if (vInfo->fptr_audiofile == NULL)
     {
-        perror("\033[0;31mfopen\033[0m");
-        fprintf(stderr, "\033[0;31mERROR: Unable to open mp3 file %s\033[0m\n", vInfo->audio_file_name);
+        perror("\033[1;31mfopen\033[0m");
+        fprintf(stderr, "\033[1;31mERROR: Unable to open mp3 file %s\033[0m\n", vInfo->audio_file_name);
         return failure;
     }
     return success;
@@ -35,17 +35,17 @@ Status ID3_Validate_view(ViewInfo *vInfo)  // Function to validate ID3 header
     fread(vInfo->header, 1, 3, vInfo->fptr_audiofile);  // Reads first 3 bytes to check for "ID3".
     if (strcmp(vInfo->header, "ID3")== 0)
     {
-        printf("\033[1;36mHeader ID: \033[0;33m%s\033[0m\n", vInfo->header);
+        printf("\033[1;36mHeader ID: \033[1;33m%s\033[0m\n", vInfo->header);
         fread(vInfo->version, sizeof(char), 2, vInfo->fptr_audiofile); // Reads next 2 bytes to check for version.(2.3)
         if (vInfo->version[0] == 3 && vInfo->version[1] == 0)  // Checks if version is 2.3.
         {
-            printf("\033[1;36mVersion:\033[0;33m %d.%d\033[0m\n", vInfo->version[0],vInfo->version[1]);
+            printf("\033[1;36mVersion:\033[1;33m %d.%d\033[0m\n", vInfo->version[0],vInfo->version[1]);
             fseek(vInfo->fptr_audiofile, 5, SEEK_CUR); // Skips 5 bytes of from 10 bytes of header (1 byte flag + 4 bytes size)
             return success;
         }
         else
         {
-            printf("\033[0;31mNot a valid MP3 Version,ID3 Version Should be 2.3\033[0m\n");
+            printf("\033[1;31mNot a valid MP3 Version,ID3 Version Should be 2.3\033[0m\n");
             return failure;
         }
     }
@@ -67,7 +67,7 @@ Status view_frame(ViewInfo *vInfo) // Function to read and print contents of eac
     {
         char ch;
         fread(&ch, 1, 1, vInfo->fptr_audiofile); // Reads one character from file
-        printf("\033[0;33m%c\033[0m", ch);
+        printf("\033[1;33m%c\033[0m", ch);
     }
     printf("\n\033[1;35m---------------------------------------------------------------\n");
     return success;
@@ -92,8 +92,10 @@ Status view(ViewInfo *vInfo) // Main function for viewing all MP3 tag values
     printf("\033[1;35m===============================================================\n");
     if (open_files_view(vInfo) == success)
     {
+        printf("\033[1;32mMP3 Audio File Opened Successfully\033[0m\n");
         if (ID3_Validate_view(vInfo) == success)
         {
+            printf("\033[1;32mMP3 Header ID and Version Validated Successfully\033[0m\n");
             printf("\033[1;35m---------------------------------------------------------------\n");
             uint frame_size;
             while (1) // Infinite loop to read all frames
@@ -162,39 +164,39 @@ Status view(ViewInfo *vInfo) // Main function for viewing all MP3 tag values
             // if any of the frames are not found
             if (!title_found)
             {
-                printf("\033[0;31mTitle frame not found\033[0m\n");
+                printf("\033[1;31mTitle frame not found\033[0m\n");
             }
             if (!artist_found)
             {
-                printf("\033[0;31mArtist frame not found\033[0m\n");
+                printf("\033[1;31mArtist frame not found\033[0m\n");
             }
             if (!album_found)
             {
-                printf("\033[0;31mAlbum frame not found\033[0m\n");
+                printf("\033[1;31mAlbum frame not found\033[0m\n");
             }
             if (!year_found)
             {
-                printf("\033[0;31mYear frame not found\033[0m\n");
+                printf("\033[1;31mYear frame not found\033[0m\n");
             }
             if (!content_found)
             {
-                printf("\033[0;31mContent Type not found\033[0m\n");
+                printf("\033[1;31mContent Type not found\033[0m\n");
             }
             if (!comment_found)
             {
-                printf("\033[0;31mComment frame not found\033[0m\n");
+                printf("\033[1;31mComment frame not found\033[0m\n");
             }
             return success;
         }
         else
         {
-            printf("\033[0;31mError! Invalid ID3 header\033[0m\n");
+            printf("\033[1;31mError! Invalid ID3 header\033[0m\n");
             return failure;
         }
     }
     else
     {
-        printf("\033[0;31mError! FIles Couldn't be Opened\033[0m\n");
+        printf("\033[1;31mError! FIles Couldn't be Opened\033[0m\n");
         return failure;
     }
 }

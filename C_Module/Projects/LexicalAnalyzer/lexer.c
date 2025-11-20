@@ -20,16 +20,24 @@ void initializeLexer(char *argv[])
         if (token->fptr_file == NULL)
         {
             perror("\033[0;31mfopen\033[0m");
-            fprintf(stderr, "\033[0;31mERROR: Unable to Open .c file %s\033[0m\n", token->fptr_file);
+            fprintf(stderr, "\033[0;31mERROR: Unable to Open .c file %s\033[0m\n", token->filename);
         }
     }
 }
 void categorizeToken(Token* token)
 {
-    fseek(token->fptr_file, 0, SEEK_END);
-    uint size = ftell(token->fptr_file);
-    for (int i = 0;i < size;i++)
+    int i = 0;
+    char buffer[MAX_TOKEN_SIZE];
+    char ch;
+    while (fread(&ch, 1, 1, token->fptr_file) == 1)
     {
-        
+        if (ch != '\0' && ch != ' ')
+        {
+            buffer_store[i++] = ch;
+        }
+        else
+        {
+            buffer[i] = '\0';
+        }
     }
-}
+} 

@@ -18,7 +18,7 @@ Status read_and_validate_mp3_edit(char *argv[], EditInfo *eInfo) // Validates us
     }
     else
     {
-        printf("\033[0;31mError: The Audio File Must be in .mp3 format\033[0m\n");
+        printf("\033[1;31mError: The Audio File Must be in .mp3 format\033[0m\n");
         return failure;
     }
 }
@@ -28,8 +28,8 @@ Status open_files_edit(EditInfo* eInfo)
     eInfo->fptr_audiofile = fopen(eInfo->audio_file_name, "rb"); // Open Input MP3 File  in read-binary
     if (eInfo->fptr_audiofile == NULL)
     {
-        perror("\033[0;31mfopen\033[0m");
-        fprintf(stderr, "\033[0;31mERROR: Unable to Audio open file %s\033[0m\n", eInfo->audio_file_name);
+        perror("\033[1;31mfopen\033[0m");
+        fprintf(stderr, "\033[1;31mERROR: Unable to Audio open file %s\033[0m\n", eInfo->audio_file_name);
         return failure;
     }
     //when edit option is chosen create a file for backup
@@ -37,8 +37,8 @@ Status open_files_edit(EditInfo* eInfo)
     eInfo->fptr_backupfile = fopen(eInfo->backup_file_name, "wb"); // Open backup in write-binary
     if (eInfo->fptr_backupfile == NULL)
     {
-        perror("\033[0;31mfopen\033[0m");
-        fprintf(stderr, "\033[0;31mERROR: Unable to Audio open file %s\033[0m\n", eInfo->audio_file_name);
+        perror("\033[1;31mfopen\033[0m");
+        fprintf(stderr, "\033[1;31mERROR: Unable to Audio open file %s\033[0m\n", eInfo->audio_file_name);
         fclose(eInfo->fptr_audiofile);
         return failure;
     }
@@ -49,15 +49,15 @@ Status ID3_Validate_edit(EditInfo* eInfo)
 {
     if (fread(eInfo->header, 1, 10, eInfo->fptr_audiofile) != 10) // Read 10-byte ID3 header
     {
-        printf("\033[0;31mError: Could not read header\033[0m\n");
+        printf("\033[1;31mError: Could not read header\033[0m\n");
         return failure;
     }
     if (strncmp(eInfo->header, "ID3", 3) == 0)   // Check "ID3"
     {
-        printf("\033[0;33mHeader ID: %s\033[0m\n", eInfo->header); 
+        printf("\033[1;33mHeader ID: %s\033[0m\n", eInfo->header); 
         if (eInfo->header[3] == 3 && eInfo->header[4] == 0) // Validate version 2.3
         {
-            printf("\033[0;33mID3 Version: %d.%d\033[0m\n", eInfo->header[3], eInfo->header[4]);
+            printf("\033[1;33mID3 Version: %d.%d\033[0m\n", eInfo->header[3], eInfo->header[4]);
             rewind(eInfo->fptr_audiofile); // Go back to start of file
             fwrite(eInfo->header, 1, 10, eInfo->fptr_backupfile); // After validation copy 10 bytes of ID3 header directly to backup file
             fseek(eInfo->fptr_audiofile, 10, SEEK_SET);  // Skip past header
@@ -65,13 +65,13 @@ Status ID3_Validate_edit(EditInfo* eInfo)
         }
         else
         {
-            printf("\033[0;31mError: Not a valid MP3 Version,ID3 Version Should be 2.3\033[0m\n");
+            printf("\033[1;31mError: Not a valid MP3 Version,ID3 Version Should be 2.3\033[0m\n");
             return failure;
         }
     }
     else
     {
-        printf("\033[0;31mID3 Tag Not Found,Not a valid MP3 file\033[0m\n");
+        printf("\033[1;31mID3 Tag Not Found,Not a valid MP3 file\033[0m\n");
         return failure;
     }
 }
@@ -89,7 +89,7 @@ Status edit_frame(EditInfo *eInfo, const char *target_frame)
         eInfo->frame_id[4] = '\0';  // Add '\0' to make it a string
         if (strcmp(eInfo->frame_id, target_frame) == 0)  // Check if this is the frame to edit
         {
-            printf("\033[0;36mEditing %s.......\n", target_frame);
+            printf("\033[1;34mEditing %s.......\n", target_frame);
             //Reading
             flag = 1;   // Set found flag
             fread(&temp, 1, 4, eInfo->fptr_audiofile); //Read 4 bytes of Frame id size
@@ -107,7 +107,7 @@ Status edit_frame(EditInfo *eInfo, const char *target_frame)
             fwrite(eInfo->frame_encoding, 1, 1, eInfo->fptr_backupfile); // Write 1 byte Encoding byte to backup file
             fwrite(eInfo->edit_content, 1, new_content_size, eInfo->fptr_backupfile); // Write updated text
             fseek(eInfo->fptr_audiofile, size - 1, SEEK_CUR); // Skip old content in original file
-            printf("\033[0;36m%s is Updated with %s\n", eInfo->frame_id, eInfo->edit_content);
+            printf("\033[1;36m%s is Now Updated with %s\n", eInfo->frame_id, eInfo->edit_content);
         }
         else
         {
@@ -142,7 +142,7 @@ Status edit_frame(EditInfo *eInfo, const char *target_frame)
     fclose(eInfo->fptr_backupfile); //close backup file
     if (flag == 0)  // Frame not found check
     {
-        printf("\033[0;31m%s frame not found\033[0m\n", target_frame);
+        printf("\033[1;31m%s frame not found\033[0m\n", target_frame);
         return failure;
     }
     remove(eInfo->audio_file_name);  // Delete original input mp3 file
@@ -165,18 +165,20 @@ Status edit(char* argv[], EditInfo* eInfo)
 {
     if (open_files_edit(eInfo) == success)
     {
+        printf("\033[1;32mMP3 Audio File Opened Successfully\033[0m\n");
         if (ID3_Validate_edit(eInfo) == success)
         {
+            printf("\033[1;32mMP3 Header ID and Version Validated Successfully\033[0m\n");
             if (strcmp(eInfo->option, "-t") == 0) // If user selected -t (edit title)
             {
                 if (edit_frame(eInfo, "TIT2") == success) // Edit the title frame (TIT2)
                 {
-                    printf("\033[0;32mTitle Edited Successfully\033[0m\n");
+                    printf("\033[1;32mTitle Edited Successfully\033[0m\n");
                     return success;
                 }
                 else
                 {
-                    printf("\033[0;31mTitle Edit Failed\033[0m\n");
+                    printf("\033[1;31mTitle Edit Failed\033[0m\n");
                     return failure;
                 }
             }
@@ -184,12 +186,12 @@ Status edit(char* argv[], EditInfo* eInfo)
             {
                 if (edit_frame(eInfo, "TPE1") == success) // Edit the artist frame (TPE1)
                 {
-                    printf("\033[0;32mArtist Name Edited Successfully\033[0m\n");
+                    printf("\033[1;32mArtist Name Edited Successfully\033[0m\n");
                     return success;
                 }
                 else
                 {
-                    printf("\033[0;31mArtist Name Edit Failed\033[0m\n");
+                    printf("\033[1;31mArtist Name Edit Failed\033[0m\n");
                     return failure;
                 }
             }
@@ -197,12 +199,12 @@ Status edit(char* argv[], EditInfo* eInfo)
             {
                 if (edit_frame(eInfo, "TALB") == success) // Edit the album frame (TALB)
                 {
-                    printf("\033[0;32mAlbum Name Edited Successfully\033[0m\n");
+                    printf("\033[1;32mAlbum Name Edited Successfully\033[0m\n");
                     return success;
                 }
                 else
                 {
-                    printf("\033[0;31mAlbum Name Edit Failed\033[0m\n");
+                    printf("\033[1;31mAlbum Name Edit Failed\033[0m\n");
                     return failure;
                 }
             }
@@ -210,12 +212,12 @@ Status edit(char* argv[], EditInfo* eInfo)
             {
                 if (edit_frame(eInfo, "TYER") == success) // Edit the year frame (TYER)
                 {
-                    printf("\033[0;32mYear Edited Successfully\033[0m\n");
+                    printf("\033[1;32mYear Edited Successfully\033[0m\n");
                     return success;
                 }
                 else
                 {
-                    printf("\033[0;31mYear Edit Failed\033[0m\n");
+                    printf("\033[1;31mYear Edit Failed\033[0m\n");
                     return failure;
                 }
             }
@@ -223,12 +225,12 @@ Status edit(char* argv[], EditInfo* eInfo)
             {
                 if (edit_frame(eInfo, "TCON") == success) // Edit the content frame (TCON)
                 {
-                    printf("\033[0;32mContent Type Edited Successfully\033[0m\n");
+                    printf("\033[1;32mContent Type Edited Successfully\033[0m\n");
                     return success;
                 }
                 else
                 {
-                    printf("\033[0;31mContent Type Edit Failed\033[0m\n");
+                    printf("\033[1;31mContent Type Edit Failed\033[0m\n");
                     return failure;
                 }
             }
@@ -236,25 +238,25 @@ Status edit(char* argv[], EditInfo* eInfo)
             {
                 if (edit_frame(eInfo, "COMM") == success) // Edit the comment frame (COMM)
                 {
-                    printf("\033[0;32mComments Edited Successfully\033[0m\n");
+                    printf("\033[1;32mComments Edited Successfully\033[0m\n");
                     return success;
                 }
                 else
                 {
-                    printf("\033[0;31mComments Edit Failed\033[0m\n");
+                    printf("\033[1;31mComments Edit Failed\033[0m\n");
                     return failure;
                 }
             }
         }
         else
         {
-            printf("\033[0;31mError! Invalid ID3 header\033[0m\n");
+            printf("\033[1;31mError! Invalid ID3 header\033[0m\n");
             return failure;
         }
     }
     else
     {
-        printf("\033[0;31mError! Files Couldn't be Opened\033[0m\n");
+        printf("\033[1;31mError! Files Couldn't be Opened\033[0m\n");
         return failure;
     }
 }
