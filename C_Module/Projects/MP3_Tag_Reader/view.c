@@ -92,7 +92,7 @@ Status view(ViewInfo *vInfo) // Main function for viewing all MP3 tag values
     printf("\033[1;35m===============================================================\n");
     if (open_files_view(vInfo) == success)
     {
-        printf("\033[1;32mMP3 Audio File Opened Successfully\033[0m\n");
+        printf("\033[1;32m%s Audio File Opened Successfully\033[0m\n",vInfo->audio_file_name);
         if (ID3_Validate_view(vInfo) == success)
         {
             printf("\033[1;32mMP3 Header ID and Version Validated Successfully\033[0m\n");

@@ -17,18 +17,18 @@ typedef enum {
 typedef struct
 {
     FILE* fptr_file;
-    const char* filename;
+    char* filename;
     char lexi[MAX_TOKEN_SIZE];
     TokenType type;
 } Token;
 
 void initializeLexer(char* argv[]);
-Token getNextToken();
+//Token getNextToken();
 void categorizeToken(Token* token);
-int isKeyword(const char* str);
-int isOperator(const char* str);
-int isSpecialCharacter(char ch);
-int isConstant(const char* str);
-int isIdentifier(const char* str);
+int isKeyword(char* str);
+int isOperator(char* str);
+int isSpecialCharacter(char* str);
+int isConstant(char* str);
+int isIdentifier(char* str);
 
 #endif

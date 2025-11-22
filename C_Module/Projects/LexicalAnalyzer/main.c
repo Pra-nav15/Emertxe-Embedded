@@ -3,11 +3,12 @@
 
 int main(int argc, char* argv[])
 {
-    initializeLexer(argv[1]);
-    Token token;
+    initializeLexer(argv);
+    /* Token token;
     while ((token = getNextToken()).type != UNKNOWN)
     {
         printf("Token: %s, Type: %d\n", token.lexi, token.type);
-    }
+    } */
+    printf("Success");
     return 0;
 }
