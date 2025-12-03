@@ -1,0 +1,8 @@
+Volatile
+It is a data type qualifier
+It is a keyword instructing the compiler not to apply any optimizations on objects qualified with it.
+The compiler sometimes act extra smart on the  objects not qualified with volatile
+Takes implicit assumption the objects
+
+
+For higher level of optimization use -O3 during compiling gcc -O3 code.c
