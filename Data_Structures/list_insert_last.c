@@ -14,6 +14,7 @@ int main()
 {
     Slist* head = NULL;
     int arr[5];
+    printf("Enter the elements needed to be Inserted in the List:\n");
     for (int i = 0;i < 5;i++)
     {
         scanf("%d", &arr[i]);
@@ -24,7 +25,9 @@ int main()
     }
     printf("List before Inserting at Last:\n");
     printlist(head);
-    int data = 25;
+    int data;
+    printf("Enter the Data to be inserted: ");
+    scanf("%d", &data);
     printf("List After Inserting at Last:\n");
     insert_at_last(&head, data);
     printlist(head);

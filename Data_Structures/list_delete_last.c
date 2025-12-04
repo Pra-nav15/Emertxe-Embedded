@@ -15,6 +15,7 @@ int main()
 {
     Slist* head = NULL;
     int arr[5];
+    printf("Enter the elements needed to be Inserted in the List:\n");
     for (int i = 0;i < 5;i++)
     {
         scanf("%d", &arr[i]);

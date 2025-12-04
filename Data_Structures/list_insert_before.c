@@ -15,6 +15,7 @@ int main()
 {
     Slist* head = NULL;
     int arr[5];
+    printf("Enter the elements needed to be Inserted in the List:\n");
     for (int i = 0;i < 5;i++)
     {
         scanf("%d", &arr[i]);
@@ -25,8 +26,10 @@ int main()
     }
     printf("List before Inserting new data before given data is :\n");
     printlist(head);
-    int given_data = 10;
-    int new_data = 25;
+    int given_data;
+    int new_data;
+    printf("Enter the Given Data and New Data :");
+    scanf("%d %d", &given_data, &new_data);
     if (insert_before(&head, given_data, new_data) == SUCCESS)
     {
         printf("List after Inserting new data before given data is :\n");
