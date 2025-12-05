@@ -1,5 +1,6 @@
 #define FAILURE 0
 #define SUCCESS 1
+#define DATA_NOT_FOUND 2
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -9,8 +10,9 @@ typedef struct Node
     struct Node* link;
 }Slist;
 int insert_at_first(Slist**, int);
-int delete_list(Slist**);
+int find_node(Slist*,int );
 void printlist(Slist* head);
+int count = 0;
 int main()
 {
     Slist* head = NULL;
@@ -24,12 +26,19 @@ int main()
     {
         insert_at_first(&head, arr[i]);
     }
-    printf("List Before Delete : \n");
+    printf("List : \n");
     printlist(head);
-    if (delete_list(&head) == SUCCESS)
+    int given_data;
+    printf("Enter data to be searched :");
+    scanf("%d", &given_data);
+    if (find_node(head, given_data) == SUCCESS)
     {
-        printf("List is Deleted Successfully\n");
+        printf("Node Found at index %d\n",count);
         return SUCCESS;
+    }
+    else
+    {
+        printf("Node not Found in the given List.\n");
     }
 }
 int insert_at_first(Slist** head, int data)
@@ -51,7 +60,7 @@ int insert_at_first(Slist** head, int data)
     *head = new;
     return SUCCESS;
 }
-int delete_list(Slist** head)
+int find_node(Slist* head,int given_data)
 {
     if (head == NULL)
     {
@@ -59,9 +68,19 @@ int delete_list(Slist** head)
     }
     else
     {
-        Slist* temp = *head;
-        free(temp);
-        return SUCCESS;
+        while (head != NULL)
+        {
+            if (head->data == given_data)
+            {
+                return SUCCESS;
+            }
+            else
+            {
+                count++;
+                head = head->link;
+            }
+        }
+        return DATA_NOT_FOUND;
     }
 }
 void printlist(Slist* head)
