@@ -27,7 +27,7 @@ int dl_insert_first(Dlist** head, Dlist** tail, int data);
 /*To print the result*/
 void print_list(Dlist* head);
 
-int listcount_equal(Dlist** t1, Dlist** t2);
+int dl_delete_list(Dlist** head, Dlist** tail);
 
 /*Addition */
 int addition(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **headR,Dlist **tailR);
@@ -38,6 +38,7 @@ int subtraction(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **
 /*Multiplication*/
 int multiplication(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **headR,Dlist **tailR);
 
+int dl_delete_list(Dlist** head, Dlist** tail);
 
 /*Division */
 int division(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **headR,Dlist **tailR);

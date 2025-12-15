@@ -81,6 +81,9 @@ int main(int argc, char* argv[])
 				break;
 			case '*':	
 				/* call the function to perform the multiplication operation */
+				digit_to_list(&head1,&tail1,&head2,&tail2,argv);
+				multiplication(&head1, &tail1, &head2, &tail2, &headR, &tailR);
+				print_list(headR);
 				break;
 			case '/':	
 				/* call the function to perform the division operation */

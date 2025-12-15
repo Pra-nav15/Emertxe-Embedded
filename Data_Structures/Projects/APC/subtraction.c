@@ -9,27 +9,25 @@ int subtraction(Dlist **head1, Dlist **tail1, Dlist **head2, Dlist **tail2, Dlis
 	{
 		if (temp1 != NULL && temp2 != NULL)
 		{
-			if(temp1->data > temp2->data)
-			{
-				result = temp1->data - temp2->data - borrow;
-				borrow = 0;
-			}
-			else if(temp1->data < temp2->data)
-			{
-				temp1->data = temp1->data + 10;
-				result = temp1->data - temp2->data - borrow;
-				borrow = 1;
-			}
-			dl_insert_first(headR, tailR, result);
+			result = temp1->data - temp2->data - borrow;
 			temp1 = temp1->prev;
-		    temp2 = temp2->prev;
+			temp2 = temp2->prev;
 		}
 		else if (temp1 != NULL && temp2 == NULL)
 		{
 			result = temp1->data - borrow;
-			dl_insert_first(headR, tailR, result);
 			temp1 = temp1->prev;
 		}
+		if (result < 0)
+		{
+			result = result + 10;
+			borrow = 1;
+		}
+		else
+		{
+			borrow = 0;
+		}
+		dl_insert_first(headR, tailR, result);
 	}
-	return SUCCESS;
+    return SUCCESS;
 }
