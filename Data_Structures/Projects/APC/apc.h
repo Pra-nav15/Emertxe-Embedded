@@ -4,6 +4,10 @@
 #include<stdlib.h>
 #define SUCCESS 0
 #define FAILURE -1
+#define GREATER 3
+#define LESSER -2
+#define EQUAL 2
+
 
 
 typedef struct node
@@ -29,6 +33,8 @@ void print_list(Dlist* head);
 
 int dl_delete_list(Dlist** head, Dlist** tail);
 
+int list_compare(Dlist* head, Dlist* tail);
+
 /*Addition */
 int addition(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **headR,Dlist **tailR);
 
@@ -37,8 +43,6 @@ int subtraction(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **
 
 /*Multiplication*/
 int multiplication(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **headR,Dlist **tailR);
-
-int dl_delete_list(Dlist** head, Dlist** tail);
 
 /*Division */
 int division(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **headR,Dlist **tailR);

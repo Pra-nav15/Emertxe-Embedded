@@ -29,5 +29,12 @@ int subtraction(Dlist **head1, Dlist **tail1, Dlist **head2, Dlist **tail2, Dlis
 		}
 		dl_insert_first(headR, tailR, result);
 	}
-    return SUCCESS;
+	while ((*headR)->data == 0 && (*headR)->next != NULL)
+	{
+		Dlist* swap = *headR;
+		*headR = (*headR)->next;
+		(*headR)->prev = NULL;
+		free(swap);
+	}
+	return SUCCESS;
 }
