@@ -4,10 +4,6 @@
 #include<stdlib.h>
 #define SUCCESS 0
 #define FAILURE -1
-#define GREATER 3
-#define LESSER -2
-#define EQUAL 2
-
 
 
 typedef struct node

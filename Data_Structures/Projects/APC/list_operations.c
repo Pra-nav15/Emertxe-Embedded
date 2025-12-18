@@ -90,11 +90,11 @@ int list_compare(Dlist* head1, Dlist* head2)
     }
     if (list1_count > list2_count)
     {
-        return GREATER;
+        return SUCCESS;
     }
     else if (list1_count < list2_count)
     {
-        return LESSER;
+        return FAILURE;
     }
     else
     {
@@ -104,15 +104,14 @@ int list_compare(Dlist* head1, Dlist* head2)
         {
             if (t1->data > t2->data)
             {
-                return GREATER;
+                return SUCCESS;
             }
             else if (t1->data < t2->data)
             {
-                 return LESSER;
+                 return FAILURE;
             }
             t1 = t1->next;
             t2 = t2->next;
         }
-        return EQUAL;
     }
 }

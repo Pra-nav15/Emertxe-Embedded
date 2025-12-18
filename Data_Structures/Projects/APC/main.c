@@ -18,11 +18,11 @@ int main(int argc, char* argv[])
 					break;
 			case '-':
 				digit_to_list(&head1, &tail1, &head2, &tail2, argv);
-				if (list_compare(head1, head2) == GREATER)
+				if (list_compare(head1, head2) == SUCCESS)
 				{
 				   subtraction(&head1, &tail1, &head2, &tail2, &headR, &tailR);
 				}
-				else if (list_compare(head1, head2) == LESSER)
+				else if (list_compare(head1, head2) == FAILURE)
 				{
 					subtraction(&head2, &tail2, &head1, &tail1, &headR, &tailR);
 					printf("-");
@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 				print_list(headR);
 				/* call the function to perform the subtraction operation */
 				break;
-			case '*':	
+			case 'x':	
 				/* call the function to perform the multiplication operation */
 				digit_to_list(&head1,&tail1,&head2,&tail2,argv);
 				multiplication(&head1, &tail1, &head2, &tail2, &headR, &tailR);
@@ -39,7 +39,11 @@ int main(int argc, char* argv[])
 			case '/':	
 				/* call the function to perform the division operation */
 				digit_to_list(&head1, &tail1, &head2, &tail2, argv);
-				division(&head1, &tail1, &head2, &tail2, &headR, &tailR);
+				if (division(&head1, &tail1, &head2, &tail2, &headR, &tailR) == FAILURE)
+				{
+					printf("Output Cannot be Obtained\n");
+					return FAILURE;
+				}
 				print_list(headR);
 				break;
 			default:
