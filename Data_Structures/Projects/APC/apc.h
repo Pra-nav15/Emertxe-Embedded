@@ -5,7 +5,7 @@
 #define SUCCESS 0
 #define FAILURE -1
 
-
+/* create a node to list*/
 typedef struct node
 {
 	struct node *prev;
@@ -27,9 +27,11 @@ int dl_insert_first(Dlist** head, Dlist** tail, int data);
 /*To print the result*/
 void print_list(Dlist* head);
 
+/*To delete the list*/
 int dl_delete_list(Dlist** head, Dlist** tail);
 
-int list_compare(Dlist* head, Dlist* tail);
+/*To compare two lists*/
+int list_compare(Dlist* head1, Dlist* head2);
 
 /*Addition */
 int addition(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,Dlist **headR,Dlist **tailR);

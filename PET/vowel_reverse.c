@@ -1,50 +1,34 @@
-#include <stdio.h>
-#include <string.h>
-
-int isVowel(char c)
-{
-    if (c=='a' || c=='e' || c=='i' || c=='o' || c=='u' ||
-        c=='A' || c=='E' || c=='I' || c=='O' || c=='U')
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+void vowels_reverse(char* str, int len);
 int main()
 {
     char str[100];
-    int i = 0;
-    int j;
-
-    scanf("%s", str);
-    j = strlen(str) - 1;
-
-    while (i < j)
+    scanf("%[^\n]", str);
+    int len = strlen(str);
+    vowels_reverse(str,len);
+    return 0;
+}
+void vowels_reverse(char* str, int len)
+{
+    int* index_arr = (int*)calloc(len, sizeof(int));
+    int k = 0;
+    for (int i = 0;i < len;i++)
     {
-        while (i < j && !isVowel(str[i]))
+        if (str[i] == 'a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u')
         {
-            i++;
-        }
-
-        while (i < j && !isVowel(str[j]))
-        {
-            j--;
-        }
-
-        if (i < j)
-        {
-            char temp = str[i];
-            str[i] = str[j];
-            str[j] = temp;
-            i++;
-            j--;
+            index_arr[k++] = i;
         }
     }
-
+    int start = 0, end = k - 1;
+    while (start < end)
+    {
+        char temp = str[index_arr[start]];
+        str[index_arr[start]] = str[index_arr[end]];
+        str[index_arr[end]] = temp;
+        start++;
+        end--;
+    }
     printf("%s", str);
-    return 0;
 }

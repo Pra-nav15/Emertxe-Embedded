@@ -5,8 +5,6 @@ int main()
 {
     int n;
     scanf("%d", &n);
-
-    int len[n];
     char** str = malloc(n * sizeof(char*));
     for (int i = 0; i < n; i++)
     {
