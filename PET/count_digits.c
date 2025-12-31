@@ -10,13 +10,12 @@ int main()
 }
 int countDigits(int num)
 {
-    int count = 1;
-    if (num == 0)
+    if (num<=0)
     {
         return 0;
     }
     else
     {
-        return count+countDigits(num / 10);
+        return 1 + countDigits(num / 10);
     }
 }
