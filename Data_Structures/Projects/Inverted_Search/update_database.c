@@ -5,12 +5,12 @@ int update_database(filenames_t** head, hashtable_t* hash_table)
     char db_file[100]; // Store database filename
     char backup_file[100]; // Store database filename
     int index;  // Hash table index
-    printf("\033[1;36mEnter the Database File to Update : \033[0m");
+    printf("\033[1;35mEnter the Database File to Update : \033[0m");
     scanf("%s", db_file);   // Read database filename from user
     char* exten = strstr(db_file, ".txt");
     if (exten == NULL || strcmp(exten, ".txt") != 0)  // Validate file extension for .txt
     {
-        printf("\033[1;31mError :Database File Should be .txt format\033[0m\n");
+        printf("\033[1;31mDatabase File should be in .txt\033[0m\n");
         return FAILURE;
     }
     FILE* fptr = fopen(db_file, "r");  // Open database file in read mode

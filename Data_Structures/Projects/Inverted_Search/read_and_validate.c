@@ -5,7 +5,7 @@ int read_and_validate(int argc, char* argv[], filenames_t** head)
     int flag;
     if (argc < 2)  // Check if at least one file is provided
     {
-        printf("\033[1;31mError! --> Usage: ./a.out file1.txt file2.txt\033[0m");
+        printf("\033[1;31mError! --> Usage: ./a.out file1.txt file2.txt\033[0m\n");
         return FAILURE;
     }
     for (int i = 1; i < argc; i++) // Loop through all command-line arguments 

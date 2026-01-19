@@ -45,18 +45,15 @@ int main(int argc, char* argv[])
     int choice; // Variable to store user menu choice
     while (1)
     {
-        printf("\033[1;33m+______________________+\n");
-        printf("|      Main Menu       |\n");
-        printf("|======================|\n");
-        printf("| 1.  Create Database  |\n");
-        printf("| 2.  Display Database |\n");
-        printf("| 3.  Search Database  |\n");
-        printf("| 4.  Update Database  |\n");
-        printf("| 5.  Save Database    |\n");
-        printf("| 6.  Exit             |\n");
-        printf("+______________________+\n");
-        printf("\033[1;36mEnter the Choice : ");
-        printf("\033[0m");
+       printf("\033[1;33m");
+        printf("+================================================+\n");
+        printf("|                    MAIN MENU                   |\n");
+        printf("+================================================+\n");
+        printf("| 1  Create Database      | 4  Update Database   |\n");
+        printf("| 2  Display Database     | 5  Save Database     |\n");
+        printf("| 3  Search Database      | 6  Exit              |\n");
+        printf("+================================================+\n");
+        printf("\033[1;36mEnter your choice [1-6]: \033[0m");
         scanf("%d", &choice); // Read user choice
         switch (choice)
         {
@@ -64,12 +61,10 @@ int main(int argc, char* argv[])
             if (status == db_created)
             {
                 printf("\033[1;31mError :Database Already Created\033[0m\n");
-                return FAILURE;
             }
             else if (status == db_updated)
             {
                 printf("\033[1;31mError :Cannot Create After the Database is Updated\033[0m\n");
-                return FAILURE;
             }
             else
             {
@@ -88,14 +83,12 @@ int main(int argc, char* argv[])
             else if (display_database(hash_table) == FAILURE)
             {
                 printf("\033[1;31mNothing to Display in Database\033[0m");
-                return FAILURE;
             }
             break;
         case 3: // Search Database
             if (status == db_empty)
             {
                 printf("\033[1;31mError :Database is Not Even Created.Please Create Database First\033[0m\n");
-                return FAILURE;
             }
             else
             {
@@ -109,35 +102,35 @@ int main(int argc, char* argv[])
             }
             break;
         case 4: // Update Database
-            if (status == db_empty)
+            if (status == db_empty) // update is possible even if database is empty
             {
-                if (update_database(&head,hash_table) == SUCCESS)
+                if (update_database(&head, hash_table) == SUCCESS)
                 {
                     status = db_updated;
                     printf("\033[1;32mDatabase Updated Successfully\033[0m\n");
                 }
                 else
                 {
-                    printf("\033[1;31mNo Previous Database File Found.Please Create Database File First\033[0m\n");
+                    printf("\033[1;31mNo Existing Database File Found. Please Create Database File First\033[0m\n");
                 }
             }
-            else if (status == db_updated)
+            else if (status == db_created) // update after create possible for new files
+            {
+                if (update_database(&head, hash_table) == SUCCESS)
+                {
+                    status = db_updated;
+                    printf("\033[1;32mDatabase Updated Successfully\033[0m\n");
+                }
+            }
+            else if (status == db_updated) // update after update is not possible
             {
                 printf("\033[1;31mWe Cannot Update an Updated Database\033[0m\n");
-            }
-            else if(status == db_created)
-            {
-                printf("\033[1;31mUpdate is Possible Before Database Create\033[0m\n");
             }
             break;
         case 5: // Save Database
             if (save_database(hash_table) == SUCCESS)
             {
                 printf("\033[1;32mDatabase Saved Successfully\033[0m\n");
-            }
-            else if(save_database(hash_table) == INVALID)
-            {
-                return FAILURE;
             }
             else
             {

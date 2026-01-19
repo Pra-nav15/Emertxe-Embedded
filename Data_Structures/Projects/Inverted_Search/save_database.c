@@ -34,13 +34,14 @@ int save_database(hashtable_t *hash_table)
                 while (sub_temp != NULL)
                 {
                     // Write file name and word count for each subnode
-                    fprintf(fptr, "%s;%d;#\n", sub_temp->file_name, sub_temp->word_count);
+                    fprintf(fptr, "%s;%d;", sub_temp->file_name, sub_temp->word_count);
                     sub_temp = sub_temp->s_link; // Move to next subnode
                 }
+                fprintf(fptr, "#\n"); // end of record marker
                 main_temp = main_temp->m_link;  // Move to next mainnode
             }
         }
     }
-    fclose(fptr);  // Close database file
+    fclose(fptr);        // Close database file
     return SUCCESS;
 }
