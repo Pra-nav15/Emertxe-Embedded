@@ -26,24 +26,28 @@ void spiral_pattern(int** arr, int rows, int cols)
     int bottom = rows - 1;
     int left = 0;
     int right = cols - 1;
-
+    int arr2[rows][cols];
+    int k = 0;
     while (top <= bottom && left <= right)
     {
         for (int i = left;i <= right;i++)
         {
-            printf("%d ", arr[top][i]);
+            arr2[k / cols][k % cols] = arr[top][i];
+            k++;
         }
         top++;
         for (int i = top;i<=bottom;i++)
         {
-            printf("%d ", arr[i][right]);
+            arr2[k / cols][k % cols] = arr[i][right];
+            k++;
         }
         right--;
         if (top <= bottom)
         {
             for (int i = right;i >= left;i--)
             {
-                printf("%d ", arr[bottom][i]);
+                arr2[k / cols][k % cols] = arr[bottom][i];
+                k++;
             }
             bottom--;
         }
@@ -51,11 +55,20 @@ void spiral_pattern(int** arr, int rows, int cols)
         {
             for (int i = bottom;i >= top;i--)
             {
-                printf("%d ", arr[i][left]);
+                arr2[k / cols][k % cols] = arr[i][left];
+                k++;
             }
             left++;
         }
 
+    }
+    for (int i = 0;i < rows;i++)
+    {
+        for (int j = 0;j < cols;j++)
+        {
+            printf("%d\t", arr2[i][j]);
+        }
+        printf("\n");
     }
 }
 

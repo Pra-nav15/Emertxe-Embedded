@@ -3,7 +3,7 @@
 void value_insert_sort(int* arr,int size);
 int main()
 {
-    int size;
+    int size, num;
     printf("Enter the Size of Array : ");
     scanf("%d", &size);
     int* arr = (int*)malloc(size * sizeof(int));

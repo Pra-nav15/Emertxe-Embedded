@@ -6,7 +6,7 @@ int main()
     scanf("%d %d", &s1, &s2);
     if (s1 != s2)
     {
-        printf("Cannot Check Mirro Array \n");
+        printf("Cannot Check Mirror Array \n");
     }
     else
     {

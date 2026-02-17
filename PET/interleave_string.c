@@ -11,15 +11,14 @@ int main()
     printf("Enter the second string:\n");
     scanf(" %[^\n]", second_str);
 
-    while (first_str[i] || second_str[j])
+    while (first_str[i] !='\0' || second_str[j] != '\0')
     {
-        if (first_str[i])
+        if (first_str[i] !='\0')
             result[k++] = first_str[i++];
 
-        if (second_str[j])
+        if (second_str[j] !='\0')
             result[k++] = second_str[j++];
     }
-
     result[k] = '\0';
     printf("%s", result);
     return 0;

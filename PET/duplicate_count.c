@@ -1,32 +1,40 @@
 #include <stdio.h>
+
 int main()
 {
-    int arr[] = {1, 2, 1, 2, 1,4};
+    int arr[] = {1, 2, 1, 2, 1, 4};
     int n = 6;
-    int flag = 0, count;
-    for (int i = 0; i < n; i++)
+    int count = 0;
+
+    for(int i = 0; i < n; i++)
     {
         int flag = 0;
-        for (int k = 0; k < i; k++)
+        for(int k = 0; k < i; k++)
         {
-            if (arr[i] == arr[k])
+            if(arr[i] == arr[k])
             {
                 flag = 1;
                 break;
             }
         }
-        if (!flag)
+        if(!flag)
         {
-            for (int j = i + 1; j < n; j++)
+            int c = 0;
+            for(int j = i + 1; j < n; j++)
             {
-                if (arr[i] == arr[j])
+                if(arr[i] == arr[j])
                 {
-                    count++;
-                    break;
+                    c++;
                 }
+            }
+            if(c > 0)
+            {
+                printf("%d occurs %d times\n", arr[i], c + 1);
+                count++;
             }
         }
     }
-    printf("%d", count);
+
+    printf("Total numbers with duplicates: %d\n", count);
     return 0;
 }

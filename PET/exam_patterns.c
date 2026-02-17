@@ -1,31 +1,27 @@
-#include<stdio.h>
-int main()
-{
-    int num;
-    scanf("%d", &num);
-    char ch = 'A';
-    for (int i = 1;i <= num;i++)
+#include <stdio.h>
+
+int main() {
+    int i, j, space, rows;
+    char ch;
+
+    rows = 4;
+    for (i = 1; i <= rows; i++)
     {
-        for (int k=num;k>i;k--)
+        for (int k= 1; k <= k- i; k++)
         {
             printf(" ");
         }
-        for (int j = 1;j <=2 * i-1;j++)
+        for (j = 1; j <= i; j++)
         {
-            printf("%c", ch++);
+            ch = 'A' + j - 1;
+            printf("%c", ch);
+        }
+        for (j = i - 1; j >= 1; j--)
+        {
+            ch = 'A' + j - 1;
+            printf("%c", ch);
         }
         printf("\n");
     }
-    for (int i = num-1;i >= 1;i--)
-    {
-        for (int k=num;k>i;k--)
-        {
-            printf(" ");
-        }
-        for (int j = 1;j <=2 * i-1;j++)
-        {
-            printf("%c", ch--);
-        }
-        printf("\n");
-    }
+    return 0;
 }

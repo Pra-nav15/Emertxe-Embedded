@@ -1,37 +1,39 @@
 #include<stdio.h>
 #include<string.h>
-void replaceSequences(char* str);
+char* replace_sequences(char *str);
 int main()
 {
-    char str[] = "bbcbbebb";
-    replaceSequences(str);
+    char str[]="bbcbbebbabfhbbahsobebebbc";
+    char*ret=replace_sequences(str);
+    printf("%s",ret);
+    return 0;
 }
-void replaceSequences(char* str)
+char* replace_sequences(char* str)
 {
-    int len = strlen(str);
-    char temp[len], k = 0;
-    for (int i = 0;i < len;i++)
+    int i=0,k=0;
+    while(str[i] != '\0')
     {
-        if (str[i] == 'b' && str[i + 1] == 'b' && str[i + 2] == 'c')
+        if(str[i]=='b' && str[i+1]=='b' && str[i+2]=='c')
         {
-            temp[k++] = '$';
-            i = i + 2;
+            str[k++] = '$';
+            i=i+3;
         }
-        else if (str[i] == 'b' && str[i + 1] == 'b' && str[i + 2] == 'e')
+        else if(str[i]=='b' && str[i+1]=='b' && str[i+2]=='e')
         {
-            temp[k++] = '&';
-            i = i + 2;
+            str[k++] = '&';
+            i=i+3;
         }
-        else if (str[i] == 'b' && str[i + 1] == 'b')
+        else if(str[i]=='b' && str[i+1]=='b')
         {
-            temp[k++] = '*';
-            i = i + 2;
+            str[k++] = '*';
+            i=i+2;
         }
         else
         {
-            temp[k++] = str[i];
+            str[k++] = str[i];
+            i++;
         }
     }
-    temp[k] = '\0';
-    printf("%s", temp);
+    str[k] = '\0';
+    return str;
 }

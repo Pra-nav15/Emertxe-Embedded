@@ -19,7 +19,7 @@ int main()
             printf("%d ", arr[i]);
         }
     }
-      for (int i = 0;i < size;i++)
+    for (int i = 0;i < size;i++)
     {
           if (arr[i] == 0)
           {

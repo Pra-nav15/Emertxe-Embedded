@@ -39,7 +39,7 @@ void string_replacement(char* str1, char* str2, int len1, int len2)
     {
         result[k++] = str1[i];
     }
-    for (int i = index_2+1;i < len2;i++)
+    for (int i = index_2;i < len2;i++)
     {
         result[k++] = str2[i];
     }

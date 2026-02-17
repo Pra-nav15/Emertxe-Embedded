@@ -1,37 +1,28 @@
 #include<stdio.h>
-void remove_char(char* str, char ch);
+#include<string.h>
+char* remove_char_from_string(char* str,char ch);
 int main()
 {
-    char str[100];
-    char ch;
-    printf("Enter the String\n");
-    scanf("%[^\n]", str);
-    printf("Enter the Character\n");
-    scanf(" %c", &ch);
-    remove_char(str, ch);
+    char str[100],ch;
+    printf("Enter the string : ");
+    scanf("%[^\n]",str);
+    printf("enter the Character to br removed : ");
+    scanf(" %c",&ch);
+    char* ret=remove_char_from_string(str,ch);
+    printf("%s",ret);
     return 0;
 }
-void remove_char(char* str, char ch)
+char* remove_char_from_string(char* str,char ch)
 {
-    int i = 0, len = 0, j = 0;
-    while (str[i] != 0)
+    int i = 0, j = 0;
+    int len=strlen(str);
+    for(i=0;i<len;i++)
     {
-        len++;
-        i++;
-    }
-    while (str[j] != 0)
-    {
-        if (str[j] == ch)
+        if(str[i]!=ch)
         {
-            for (int k = j;k < len ;k++)
-            {
-                str[k] = str[k + 1];
-            }
-            len--;
-            j--;
+            str[j++]=str[i];
         }
-        j++;
     }
-    str[len] = '\0';
-    printf("%s", str);
+    str[j]='\0';
+    return str;
 }

@@ -47,5 +47,5 @@ int sumof_even_digits(int num)
         printf("No Even Digits in the Number\n");
         return 0;
     }
-        return sum;
+    return sum;
 }

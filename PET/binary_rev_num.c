@@ -6,7 +6,6 @@ int main()
     int num;
     scanf("%d", &num);
     binary_convert(num);
-    printf("\n");
     int rev = 0;
     int ret = reverse_num(num, rev);
     printf("%d ", ret);

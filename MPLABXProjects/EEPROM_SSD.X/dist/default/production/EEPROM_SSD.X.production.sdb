@@ -1,0 +1,227 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4580 ]
+[d frameptr 4065 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\almod.c
+[v ___almod __almod `(l  1 e 4 0 ]
+"9 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\aodiv.c
+[v ___aodiv __aodiv `(o  1 e 8 0 ]
+"9 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\aomod.c
+[v ___aomod __aomod `(o  1 e 8 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\atdiv.c
+[v ___atdiv __atdiv `(m  1 e 3 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\atmod.c
+[v ___atmod __atmod `(m  1 e 3 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"4 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
+"9 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lodiv.c
+[v ___lodiv __lodiv `(uo  1 e 8 0 ]
+"9 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lomod.c
+[v ___lomod __lomod `(uo  1 e 8 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\ltdiv.c
+[v ___ltdiv __ltdiv `(um  1 e 3 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\ltmod.c
+[v ___ltmod __ltmod `(um  1 e 3 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul24.c
+[v ___tmul __tmul `(um  1 e 3 0 ]
+"15 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"9 C:\Users\PRANAV\MPLABXProjects\EEPROM_SSD.X\eeprom.c
+[v _read_internal_eeprom read_internal_eeprom `(ui  1 e 2 0 ]
+"18
+[v _write_internal_eeprom write_internal_eeprom `(v  1 e 1 0 ]
+"13 C:\Users\PRANAV\MPLABXProjects\EEPROM_SSD.X\main.c
+[v _init_config init_config `(v  1 e 1 0 ]
+"18
+[v _main main `(v  1 e 1 0 ]
+"11 C:\Users\PRANAV\MPLABXProjects\EEPROM_SSD.X\ssd.c
+[v _init_ssd_display init_ssd_display `(v  1 e 1 0 ]
+"25
+[v _display display `(v  1 e 1 0 ]
+"25503 C:/Program Files/Microchip/MPLABX/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4580.h
+[v _PORTA PORTA `VEuc  1 e 1 @3968 ]
+"25712
+[v _PORTB PORTB `VEuc  1 e 1 @3969 ]
+"26056
+[v _PORTD PORTD `VEuc  1 e 1 @3971 ]
+"26835
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"27057
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"27501
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+[s S137 . 1 `uc 1 ECCP1IF 1 0 :1:0 
+`uc 1 TMR3IF 1 0 :1:1 
+`uc 1 HLVDIF 1 0 :1:2 
+`uc 1 BCLIF 1 0 :1:3 
+`uc 1 EEIF 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CMIF 1 0 :1:6 
+`uc 1 OSCFIF 1 0 :1:7 
+]
+"28274
+[s S146 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LVDIF 1 0 :1:2 
+]
+[u S149 . 1 `S137 1 . 1 0 `S146 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES149  1 e 1 @4001 ]
+[s S58 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 WREN 1 0 :1:2 
+`uc 1 WRERR 1 0 :1:3 
+`uc 1 FREE 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CFGS 1 0 :1:6 
+`uc 1 EEPGD 1 0 :1:7 
+]
+"28711
+[s S67 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 EEFS 1 0 :1:6 
+]
+[u S70 . 1 `S58 1 . 1 0 `S67 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES70  1 e 1 @4006 ]
+"28756
+[v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
+"28763
+[v _EEDATA EEDATA `VEuc  1 e 1 @4008 ]
+"28770
+[v _EEADR EEADR `VEuc  1 e 1 @4009 ]
+[s S87 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"32185
+[s S96 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S105 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S109 . 1 `S87 1 . 1 0 `S96 1 . 1 0 `S105 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES109  1 e 1 @4082 ]
+"11 C:\Users\PRANAV\MPLABXProjects\EEPROM_SSD.X\main.c
+[v _ssd ssd `[4]uc  1 s 4 ssd ]
+"12
+[v _digit digit `[10]uc  1 s 10 digit ]
+"18
+[v _main main `(v  1 e 1 0 ]
+{
+"24
+[v main@led_delay led_delay `ul  1 a 4 28 ]
+"23
+[v main@delay delay `ul  1 a 4 24 ]
+"21
+[v main@count count `ui  1 a 2 32 ]
+"51
+} 0
+"18 C:\Users\PRANAV\MPLABXProjects\EEPROM_SSD.X\eeprom.c
+[v _write_internal_eeprom write_internal_eeprom `(v  1 e 1 0 ]
+{
+[v write_internal_eeprom@address address `uc  1 p 1 wreg ]
+[v write_internal_eeprom@address address `uc  1 p 1 wreg ]
+[v write_internal_eeprom@data data `uc  1 p 1 12 ]
+"20
+[v write_internal_eeprom@address address `uc  1 p 1 13 ]
+"33
+} 1
+"9
+[v _read_internal_eeprom read_internal_eeprom `(ui  1 e 2 0 ]
+{
+[v read_internal_eeprom@address address `uc  1 p 1 wreg ]
+[v read_internal_eeprom@address address `uc  1 p 1 wreg ]
+"11
+[v read_internal_eeprom@address address `uc  1 p 1 2 ]
+"16
+} 1
+"13 C:\Users\PRANAV\MPLABXProjects\EEPROM_SSD.X\main.c
+[v _init_config init_config `(v  1 e 1 0 ]
+{
+"16
+} 0
+"11 C:\Users\PRANAV\MPLABXProjects\EEPROM_SSD.X\ssd.c
+[v _init_ssd_display init_ssd_display `(v  1 e 1 0 ]
+{
+"22
+} 0
+"25
+[v _display display `(v  1 e 1 0 ]
+{
+"27
+[v display@wait wait `ui  1 a 2 3 ]
+"28
+[v display@digit digit `uc  1 a 1 5 ]
+"25
+[v display@data data `*.30uc  1 p 1 0 ]
+"36
+} 0
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwmod@counter counter `uc  1 a 1 11 ]
+"7
+[v ___lwmod@dividend dividend `ui  1 p 2 7 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 9 ]
+"25
+} 0
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwdiv@quotient quotient `ui  1 a 2 4 ]
+"11
+[v ___lwdiv@counter counter `uc  1 a 1 6 ]
+"7
+[v ___lwdiv@dividend dividend `ui  1 p 2 0 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
+"30
+} 0
