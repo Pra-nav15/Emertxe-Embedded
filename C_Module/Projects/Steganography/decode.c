@@ -43,7 +43,7 @@ Status read_and_validate_decode_args(char* argv[], DecodeInfo* decInfo)
 Status open_decode_files(DecodeInfo *decInfo)
 {
     // Destination Image file
-    decInfo->fptr_stego_image = fopen(decInfo->stego_image_fname, "r");
+    decInfo->fptr_stego_image = fopen(decInfo->stego_image_fname, "rb");
     // Do Error handling
     if (decInfo->fptr_stego_image == NULL)
     {
@@ -160,6 +160,7 @@ Status decode_output_file_data(DecodeInfo* decInfo)
 
 Status decode_byte_from_lsb(char* data, char* image_buffer)
 {
+    *data = 0;
     for (int i = 0; i < 8; i++) // Loop through 8 bits
     {
         *data = *data | ((image_buffer[i] & 1) << i); // Extract LSB and shift to correct position
@@ -169,6 +170,7 @@ Status decode_byte_from_lsb(char* data, char* image_buffer)
 
 Status decode_size_from_lsb(int* size,char *imageBuffer)
 {
+    *size = 0;
     for (int i = 0; i < 32; i++) // Loop through 8 bits
     {
         *size = *size | ((imageBuffer[i] & 1) << i); // Extract LSB and shift to correct position

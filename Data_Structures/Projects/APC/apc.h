@@ -13,7 +13,6 @@ typedef struct node
 	struct node *next;
 }Dlist;
 
-/* Include the prototypes here */
 
 /*store the operands into the list */
 void digit_to_list(Dlist **head1,Dlist **tail1,Dlist **head2,Dlist **tail2,char *argv[]);

@@ -11,10 +11,11 @@ void print_list(Dlist* head)
 	{
 	    while (head)		
 	    {
-		    /* Printing the list */
-		    printf("%d", head -> data);
+			/* Printing the list */
+			printf("%d", head->data);
 		    /* Travering in forward direction */
 		    head = head -> next;
-	    }
-    }
+		}
+		printf("\n");
+	}
 }

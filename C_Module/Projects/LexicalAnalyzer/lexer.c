@@ -1,20 +1,24 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "lexer.h"
 
-Token *token;
+static char *res_kwords_data[] = { "const","volatile","extern","auto","register","static","signed","unsigned","short","long","double","char","int","float","struct","union","enum","void","typedef",NULL};
+static char *res_kwords_non_data[] = { "goto","return","continue","break","if","else","for","while","switch","case","default","sizeof","do",NULL};
+static char operators[] = { '/', '+', '*', '-', '%', '=', '<', '>', '~', '&', '!', '^', '|'};
+static char symbols[]   = { '(', ')', '{', '}', '[', ']', ':', ',', ';'};
+Token token_list[MAX_TOKEN_SIZE];
+int token_count = 0;
+int token_index = 0;
+Token* token;
+int error_flag  = 0;  
+int line        = 1;
 
-static char *res_kwords_data[] = { "const","volatile","extern","auto","register","static","signed","unsigned","short","long","double","char","int","float","struct","union","enum","void","typedef","" };
-static char *res_kwords_non_data[] = { "goto","return","continue","break","if","else","for","while","switch","case","default","sizeof","do","" };
-static char operators[] = { '/', '+', '*', '-', '%', '=', '<', '>', '~', '&', ',', '!', '^', '|' };
-static char symbols[]   = { '(', ')', '{', '}', '[', ']', ':' };
-
-
-void initializeLexer(char *argv[])
+void initializeLexer(char* argv[])
 {
-    char *extn = strstr(argv[1], ".c");
-
+    token = malloc(sizeof(Token));
+    char* extn = strstr(argv[1], ".c");
     if (extn != NULL && strcmp(extn, ".c") == 0)
     {
         strcpy(token->filename, argv[1]);
@@ -25,15 +29,73 @@ void initializeLexer(char *argv[])
             fprintf(stderr, "ERROR: Unable to open the sample file %s\n", token->filename);
         }
     }
+    else
+    {
+        fprintf(stderr, "ERROR: sample file should have .c extension only\n");
+        return;
+    }
 }
 
-void categorizeToken(Token *token)
+Token getNextToken(void)
+{
+    static int initialized = 0;
+    Token t;
+    if (!initialized)
+    {
+        categorizeToken(token);
+        initialized = 1;
+    }
+    if (token_index < token_count)
+    {
+        return token_list[token_index++];
+    }
+    t.type = UNKNOWN;
+    strcpy(t.lexi, "");
+    return t;
+}
+
+void categorizeToken(Token* token)
 {
     int i = 0;
     char ch;
     while (fread(&ch, 1, 1, token->fptr_file) == 1)
     {
-        if (ch!=' ')
+        if (ch == '\n')
+        {
+            line++;  // increment on every newline
+            continue;
+        }
+        if (ch == '#')
+		{
+            while (fread(&ch, 1, 1, token->fptr_file) == 1 && ch != '\n');
+            line++;
+            continue;
+        }
+        if (ch == '"')
+        {
+            token->lexi[i++] = ch;
+            while (fread(&ch, 1, 1, token->fptr_file) == 1)
+            {
+                token->lexi[i++] = ch;
+                if (ch == '"')
+                {
+                    break;
+                }
+            }
+            token->lexi[i] = '\0';
+            if (token_count >= MAX_TOKEN_SIZE)
+            {
+                printf("Token buffer overflow\n");
+                return;
+            }
+            strcpy(token_list[token_count].lexi, token->lexi);
+            token_list[token_count].type = CONSTANT;
+            token_list[token_count].line_no = line;  // store line
+            token_count++;
+            i = 0;
+            continue;
+        }
+        if (!isspace(ch) && !strchr(operators, ch) && !strchr(symbols, ch))
         {
             token->lexi[i++] = ch;
         }
@@ -42,34 +104,56 @@ void categorizeToken(Token *token)
             if (i > 0)
             {
                 token->lexi[i] = '\0';
-                printf("Token: %s ", buffer);
-                if (isKeyword(token->lexi)== KEYWORD)
+                strcpy(token_list[token_count].lexi, token->lexi);
+                if (isKeyword(token->lexi))
                 {
-                    printf("Keywords\n");
+                    token_list[token_count].type = KEYWORD;
                 }
-                if (isOperator(token->lexi) == OPERATOR)
+                else if (isOperator(token->lexi))
                 {
-                    printf("Operator\n");
+                    token_list[token_count].type = OPERATOR;
                 }
-                if (isSpecialCharacter(token->lexi) == SPECIAL_CHARACTER)
+                else if (isSpecialCharacter(token->lexi))
                 {
-                    printf("Special Character\n");
+                    token_list[token_count].type = SPECIAL_CHARACTER;
                 }
-                if (isConstant(token->lexi) == CONSTANT)
+                else if (isConstant(token->lexi))
                 {
-                    printf("Constant\n");
+                    token_list[token_count].type = CONSTANT;
                 }
-                if (isIdentifier(token->lexi) == IDENTIFIER)
+                else if (isIdentifier(token->lexi))
                 {
-                    printf("Identifier\n");
+                    token_list[token_count].type = IDENTIFIER;
                 }
                 else
                 {
-                    printf("Unknown\n");
+                    token_list[token_count].type = UNKNOWN;
+                    printf("\033[1;31mError [Line %d]: Unknown token '%s'\033[0m\n", line, token->lexi);
+                    error_flag = 1;  // set error flag
                 }
+                token_list[token_count].line_no = line;
+                token_count++;
                 i = 0;
             }
         }
+        if (strchr(operators, ch))  // store operator as its own token
+            {
+                token->lexi[0] = ch;
+                token->lexi[1] = '\0';
+                strcpy(token_list[token_count].lexi, token->lexi);
+                token_list[token_count].type = OPERATOR;
+                token_list[token_count].line_no = line;
+                token_count++;
+            }
+            else if (strchr(symbols, ch))  // store symbol as its own token
+            {
+                token->lexi[0] = ch;
+                token->lexi[1] = '\0';
+                strcpy(token_list[token_count].lexi, token->lexi);
+                token_list[token_count].type = SPECIAL_CHARACTER;
+                token_list[token_count].line_no = line;
+                token_count++;
+            }
     }
 }
 
@@ -84,7 +168,8 @@ int isKeyword(char *str)
         }
         i++;
     }
-    while(res_kwords_non_data[i] != NULL)
+    i = 0;
+    while (res_kwords_non_data[i] != NULL)
     {
         if (strcmp(str, res_kwords_non_data[i]) == 0)
         {
@@ -97,11 +182,11 @@ int isKeyword(char *str)
 
 int isOperator(char *str)
 {
-    /* if (strlen(str) != 1)
+    if (strlen(str) != 1)
     {
         return 0;
-    } */
-    for (int i = 0; i < sizeof(operators); i++)
+    }
+    for (int i = 0; i < sizeof(operators)/sizeof(char); i++)
     {
         if (str[0] == operators[i])
         {
@@ -117,7 +202,7 @@ int isSpecialCharacter(char *str)
     {
         return 0;
     }
-    for (int i = 0; i < sizeof(symbols); i++)
+    for (int i = 0; i < sizeof(symbols)/sizeof(char); i++)
     {
         if (str[0] == symbols[i])
         {

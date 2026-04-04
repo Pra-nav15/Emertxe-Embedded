@@ -54,8 +54,8 @@ int main(int argc, char* argv[])
         printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-a", "Edit Artist Name");
         printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-A", "Edit Album Name");
         printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-y", "Edit Year");
-        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-m", "Edit Content/Genre");
-        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-c", "Edit Comment");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-c", "Edit Content/Genre");
+        printf("\033[1;33m| %-10s | %-35s |\033[0m\n", "-m", "Edit Comment");
         printf("\033[1;35m----------------------------------------------------\033[0m\n");
 
     }
